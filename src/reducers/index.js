@@ -12,5 +12,7 @@ export const dataReducer = type => (state={}, action) => {
 };
 
 export default combineReducers({
-    sign_in: dataReducer(C.SET_SIGN_IN_DATA)
+    sign_in: dataReducer(C.SET_SIGN_IN_DATA),
+    profile_name: dataReducer(C.SET_PROFILE_NAME_DATA),
+    profile_contacts: dataReducer(C.SET_PROFILE_CONTACTS_DATA)
 });

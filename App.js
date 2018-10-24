@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import appReducer from './src/reducers';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import { AuthLoading, ForgotPassword, Main, Register, ResetPassword, SignIn } from "./src/screens";
+import { FlexBoxPlayground } from './src/screens/FlexBoxPlayground';
 import initialState from './src/initialState.json';
 
 const AppStack = createStackNavigator(
@@ -26,7 +27,8 @@ const RootStack = createSwitchNavigator(
     {
         AuthLoading: AuthLoading,
         App: AppStack,
-        Auth: AuthStack
+        Auth: AuthStack,
+        FlexBoxPlayground: FlexBoxPlayground
     },
     {
         initialRouteName: 'AuthLoading'

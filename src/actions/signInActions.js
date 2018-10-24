@@ -3,7 +3,9 @@ import { fetchUrl } from '../helpers';
 import { AsyncStorage } from 'react-native';
 import CookieManager from 'react-native-cookies';
 
-export const signIn = (username, password, navigation) => dispatch => {
+export const signIn = navigation => (dispatch, getState) => {
+    const state = getState();
+
     dispatch({
         type: C.SET_SIGN_IN_DATA,
         payload: {
@@ -13,17 +15,14 @@ export const signIn = (username, password, navigation) => dispatch => {
     });
 
     let formData = new FormData();
-    formData.append('_username', username);
-    formData.append('_password', password);
+    formData.append('_username', state.sign_in.username);
+    formData.append('_password', state.sign_in.password);
     formData.append('_remember_me', 'on');
     formData.append('applogin', 'true');
 
     let cookie = null;
     fetchUrl('URL_SIGNIN', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'multipart/form-data'  // 'application/x-www-form-urlencoded'
-        },
         body: formData
     })
         .then(response => {

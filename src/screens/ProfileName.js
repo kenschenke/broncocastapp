@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapProfileNameProps, mapProfileNameDispatch } from '../maps/ProfileName.map';
-import { Button, Input, Spinner, VerticalBox, VerticalSection } from '../components';
+import { Button, Card, CardSection, Input, Spinner, VerticalBox, VerticalSection } from '../components';
 import { Text, View } from 'react-native';
 
 class ProfileNameUi extends Component {
@@ -14,39 +14,54 @@ class ProfileNameUi extends Component {
         if (this.props.updating) {
             return <Spinner label="Updating Name"/>;
         } else {
-            return <Button onPress={() => this.props.update()}>Update</Button>;
+            return <Button onPress={this.props.update}>Update</Button>;
+        }
+    }
+
+    renderErrorMsg() {
+        if (this.props.errorMsg.length) {
+            return (
+                <CardSection showBorder={false}>
+                    <Text style={{ color: '#f00'}}>{this.props.errorMsg}</Text>
+                </CardSection>
+            );
+        } else {
+            return null;
         }
     }
 
     render() {
-        return (
-            <VerticalBox>
-                <View>
-                    <VerticalSection>
-                        <Input
-                            placeholder="John Doe"
-                            label="Name"
-                            value={this.props.name}
-                            onChangeText={name => this.props.nameChanged(name)}
-                        />
-                    </VerticalSection>
+        if (this.props.getting) {
+            return (
+                <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#fff', marginTop: 10 }}>
+                    <Spinner size="small" label="Retrieving Name"/>
                 </View>
+            );
+        } else {
+            return (
+                <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#fff', marginTop: 10 }}>
+                    <Input
+                        label="Name"
+                        placeholder="Please enter your name"
+                        value={this.props.name}
+                        onChangeText={name => this.props.nameChanged(name)}
+                    />
 
-                <View>
-                    <Text style={{ color: '#f00'}}>{this.props.errorMsg}</Text>
-                </View>
+                    {this.renderErrorMsg()}
 
-                <View>
-                    {this.renderButton()}
+                    <CardSection showBorder={false}>
+                        {this.renderButton()}
+                    </CardSection>
                 </View>
-            </VerticalBox>
-        );
+            );
+        }
     }
 }
 
 ProfileNameUi.propTypes = {
     errorMsg: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    getting: PropTypes.bool.isRequired,
     updating: PropTypes.bool.isRequired,
 
     init: PropTypes.func.isRequired,

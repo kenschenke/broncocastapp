@@ -1,44 +1,99 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TextInput, View, Text } from 'react-native';
 
-const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
-    const { inputStyle, labelStyle, containerStyle } = styles;
+const Input = props => {
+    const {
+        containerStyle,
+        errorColor,
+        helpTextStyle,
+        inputStyle,
+        labelStyle,
+        neutralColor,
+        successColor,
+        validationIconStyle
+    } = styles;
+
+    let color;
+    switch (props.validContext) {
+        case 'error':
+            color = errorColor;
+            break;
+
+        case 'success':
+            color = successColor;
+            break;
+
+        case 'neutral':
+        default:
+            color = neutralColor;
+            break;
+    }
 
     return (
         <View style={containerStyle}>
-            {label && <Text style={labelStyle}>{label}</Text>}
-            <TextInput
-                secureTextEntry={secureTextEntry}
-                placeholder={placeholder}
-                autoCorrect={false}
-                style={inputStyle}
-                value={value}
-                onChangeText={onChangeText}
-            />
+            <Text style={{ ...labelStyle, color }}>{props.label}</Text>
+            <View style={{ flexDirection: 'row' }}>
+                <TextInput style={{ ...inputStyle, borderColor: color }} {...props}/>
+                <View style={{ ...validationIconStyle, color }}/>
+            </View>
+            <Text style={{ ...helpTextStyle, color }}>{props.helpText}</Text>
         </View>
     );
 };
 
 const styles = {
-    inputStyle: {
-        color: '#000',
-        paddingRight: 5,
-        paddingLeft: 5,
-        fontSize: 18,
-        lineHeight: 23,
-        flex: 2
-    },
-    labelStyle: {
-        fontSize: 18,
-        paddingLeft: 20,
-        flex: 1
-    },
+    errorColor: '#c72a27',
+    neutralColor: '#aaa',
+    successColor: '#009e0f',
+
     containerStyle: {
-        height: 40,
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center'
+        // backgroundColor: '#fff',
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 0,
+        paddingBottom: 10,
+        flexDirection: 'column'
+    },
+
+    helpTextStyle: {
+        fontSize: 16,
+        marginTop: 5
+    },
+
+    inputStyle: {
+        fontSize: 18,
+        borderWidth: 1,
+        borderRadius: 4,
+        padding: 5,
+        flexGrow: 1
+    },
+
+    labelStyle: {
+        fontSize: 16,
+        marginBottom: 5
+    },
+
+    validationIconStyle: {
+        paddingLeft: 10,
+        paddingTop: 5,
+        width: 30,
     }
+};
+
+Input.propTypes = {
+    helpText: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    validContext: PropTypes.string.isRequired,
+};
+
+Input.defaultProps = {
+    helpText: '',
+    label: '',
+    validContext: 'neutral'
 };
 
 export { Input };

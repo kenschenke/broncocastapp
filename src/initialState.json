@@ -1,6 +1,22 @@
 {
   "sign_in": {
+    "username": "",
+    "password": "",
     "signingIn": false,
+    "errorMsg": ""
+  },
+
+  "profile_name": {
+    "name": "",
+    "singleMsg": false,
+    "getting": false,
+    "updating": false,
+    "errorMsg": ""
+  },
+
+  "profile_contacts": {
+    "contacts": [],
+    "fetching": false,
     "errorMsg": ""
   }
 }

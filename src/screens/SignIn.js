@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapSignInProps, mapSignInDispatch } from '../maps/SignIn.map';
-import { Button, Input, Spinner, VerticalBox, VerticalSection } from '../components';
+import { Button, Card, CardSection, Input, Spinner } from '../components';
 import { Text, View } from 'react-native';
 
 class SignInUi extends Component {
@@ -10,79 +10,84 @@ class SignInUi extends Component {
         title: 'Sign In'
     };
 
-    constructor(props) {
-        super(props);
-
-        this.state = { username: '', password: '' };
-    }
-
     componentDidMount() {
         this.props.init();
     }
 
     renderButtons() {
         if (this.props.signingIn) {
-            return <Spinner label="Signing In"/>;
+            return (
+                <CardSection showBorder={false} transparent={true}>
+                    <Spinner label="Signing In"/>
+                </CardSection>
+            );
         } else {
             return (
                 <View>
-                    <VerticalSection>
+                    <CardSection showBorder={false} transparent={true}>
                         <Button onPress={this.signInPressed}>Sign In</Button>
-                    </VerticalSection>
+                    </CardSection>
 
-                    <VerticalSection>
+                    <CardSection showBorder={false} transparent={true}>
                         <Button onPress={() => this.props.navigation.navigate('Register')}>Register</Button>
                         <Button onPress={() => this.props.navigation.navigate('ForgotPassword')}>Forgot Password</Button>
-                    </VerticalSection>
+                    </CardSection>
                 </View>
             );
         }
     }
 
+    renderErrorMsg() {
+        if (this.props.errorMsg.length) {
+            return (
+                <CardSection showBorder={false}>
+                    <Text style={{color: '#f00'}}>{this.props.errorMsg}</Text>
+                </CardSection>
+            );
+        } else {
+            return null;
+        }
+    }
+
     signInPressed = () => {
-        this.props.signIn(this.state.username, this.state.password, this.props.navigation);
+        this.props.signIn(this.props.navigation);
     };
 
     render() {
         return (
-            <VerticalBox>
-                <View style={{ flex: 1 }}>
-                    <VerticalSection>
-                        <Input
-                            placeholder="user@email.com"
-                            label="Email"
-                            value={this.state.username}
-                            onChangeText={username => this.setState({ username })}
-                        />
-                    </VerticalSection>
+            <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#fff' }}>
+                <Input
+                    label="Email or phone number (digits only)"
+                    value={this.props.username}
+                    onChangeText={username => this.props.usernameChanged(username)}
+                />
 
-                    <VerticalSection>
-                        <Input
-                            secureTextEntry
-                            placeholder="password"
-                            label="Password"
-                            value={this.state.password}
-                            onChangeText={password => this.setState({ password })}
-                        />
-                    </VerticalSection>
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ color: '#f00'}}>{this.props.errorMsg}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
+                <Input
+                    secureTextEntry
+                    label="Password"
+                    value={this.props.password}
+                    onChangeText={password => this.props.passwordChanged(password)}
+                />
+
+                {this.renderErrorMsg()}
+
+                <Card transparent={true}>
                     {this.renderButtons()}
-                </View>
-                <View style={{ flex: 4 }}/>
-            </VerticalBox>
+                </Card>
+            </View>
         );
     }
 }
 
 SignInUi.propTypes = {
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
     signingIn: PropTypes.bool.isRequired,
 
     init: PropTypes.func.isRequired,
-    signIn: PropTypes.func.isRequired
+    signIn: PropTypes.func.isRequired,
+    usernameChanged: PropTypes.func.isRequired,
+    passwordChanged: PropTypes.func.isRequired
 };
 
 export const SignIn = connect(mapSignInProps, mapSignInDispatch)(SignInUi);

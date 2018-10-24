@@ -1,23 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
 const CardSection = (props) => {
+    const { containerStyle, backgroundStyles, borderStyles } = styles;
+    let cardStyle = { ...containerStyle };
+    if (props.showBorder) {
+        cardStyle = { ...cardStyle, ...borderStyles };
+    }
+    if (!props.transparent) {
+        cardStyle = { ...cardStyle, ...backgroundStyles };
+    }
+
     return (
-        <View style={styles.containerStyle}>
+        <View style={{ ...cardStyle, ...props.style }}>
             {props.children}
         </View>
     );
 };
 
+CardSection.propTypes = {
+    showBorder: PropTypes.bool.isRequired,
+    transparent: PropTypes.bool.isRequired
+};
+
+CardSection.defaultProps = {
+    showBorder: true,
+    transparent: false
+};
+
 const styles = {
     containerStyle: {
-        borderBottomWidth: 1,
         padding: 5,
-        backgroundColor: '#fff',
         justifyContent: 'flex-start',
         flexDirection: 'row',
-        borderColor: '#ddd',
         position: 'relative'
+    },
+
+    backgroundStyles: {
+        backgroundColor: '#fff'
+    },
+
+    borderStyles: {
+        borderBottomWidth: 1,
+        borderColor: '#ddd'
     }
 };
 
