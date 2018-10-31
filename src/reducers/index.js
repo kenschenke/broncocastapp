@@ -15,5 +15,6 @@ export default combineReducers({
     sign_in: dataReducer(C.SET_SIGN_IN_DATA),
     profile_name: dataReducer(C.SET_PROFILE_NAME_DATA),
     profile_contacts: dataReducer(C.SET_PROFILE_CONTACTS_DATA),
-    contact_detail: dataReducer(C.SET_CONTACT_DETAIL_DATA)
+    contact_detail: dataReducer(C.SET_CONTACT_DETAIL_DATA),
+    profile_orgs: dataReducer(C.SET_PROFILE_ORGS_DATA)
 });

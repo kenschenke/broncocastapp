@@ -134,7 +134,7 @@ export const saveContact = () => (dispatch, getState) => {
 
 export const setSingleMsg = singleMsg => (dispatch, getState) => {
     const state = getState();
-    
+
     const name = state.profile_name.name.trim();
     if (!name.length) {
         dispatch({

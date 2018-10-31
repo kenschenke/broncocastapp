@@ -12,8 +12,8 @@ class ProfileContactDetailUi extends Component {
             'Delete Contact',
             'Are you sure?',
             [
-                { text: 'Cancel', style: 'cancel' },
-                { text: 'OK', style: 'destructive', onPress: () => this.props.deletePressed(this.props.navigation) }
+                { text: 'No', style: 'cancel' },
+                { text: 'Yes', style: 'destructive', onPress: () => this.props.deletePressed(this.props.navigation) }
             ]
         );
     };
