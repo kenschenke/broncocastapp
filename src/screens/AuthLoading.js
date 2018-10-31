@@ -1,3 +1,4 @@
+import C from '../contants';
 import React, { Component } from 'react';
 import { Spinner } from '../components';
 import { View } from 'react-native';
@@ -9,7 +10,7 @@ export class AuthLoading extends Component {
     };
 
     componentDidMount() {
-        fetchUrl('URL_ISAUTH')
+        fetchUrl(C.URL_ISAUTH)
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ loading: false, isAuth: responseJson.IsAuth });

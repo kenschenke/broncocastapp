@@ -21,7 +21,7 @@ export const signIn = navigation => (dispatch, getState) => {
     formData.append('applogin', 'true');
 
     let cookie = null;
-    fetchUrl('URL_SIGNIN', {
+    fetchUrl(C.URL_SIGNIN, {
         method: 'POST',
         body: formData
     })

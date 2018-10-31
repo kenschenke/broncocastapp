@@ -1,7 +1,7 @@
 import C from './contants';
 import { AsyncStorage } from 'react-native';
 
-export const fetchUrl = (urlConst, options) => {
+export const fetchUrl = (relativeUrl, options) => {
     return AsyncStorage.getItem('AuthCookie').then(cookie => {
         if (options === undefined) {
             options = {};
@@ -12,12 +12,20 @@ export const fetchUrl = (urlConst, options) => {
             options.headers = { cookie };
         }
 
-        return fetch(makeUrl(urlConst), options);
+        return fetch(`${C.SERVER}/${relativeUrl}`, options);
     });
 };
 
+export const formatContact = contact => {
+    if (contact.length === 10 && contact.search(/[^0-9]/) === -1) {
+        return `(${contact.substr(0,3)}) ${contact.substr(3,3)}-${contact.substr(6)}`;
+    }
+
+    return contact;
+};
+
 export const logout = navigation => {
-    fetchUrl('URL_LOGOUT', {})
+    fetchUrl(C.URL_LOGOUT, {})
         .then(response => response.json())
         .then(data => {
             if (data.Success) {
@@ -28,6 +36,3 @@ export const logout = navigation => {
         });
 };
 
-export const makeUrl = urlConst => {
-    return `${C.SERVER}/${C[urlConst]}`;
-};

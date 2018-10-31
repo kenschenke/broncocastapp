@@ -9,7 +9,7 @@ import { logout } from '../helpers';
 
 export const Main = createBottomTabNavigator({
     Profile: Profile,
-    MyBroadcasts: MyBroadcasts,
+    'My Broadcasts': MyBroadcasts,
     Admin: Admin
 }, {
     initialRouteName: 'Profile',
@@ -19,7 +19,7 @@ export const Main = createBottomTabNavigator({
             let iconName;
             if (routeName === 'Profile') {
                 iconName = 'ios-person';
-            } else if (routeName === 'MyBroadcasts') {
+            } else if (routeName === 'My Broadcasts') {
                 iconName = 'ios-radio';
             } else if (routeName === 'Admin') {
                 iconName = 'ios-cog';

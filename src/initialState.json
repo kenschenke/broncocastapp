@@ -11,12 +11,24 @@
     "singleMsg": false,
     "getting": false,
     "updating": false,
+    "saved": false,
     "errorMsg": ""
   },
 
   "profile_contacts": {
     "contacts": [],
+    "singleMsg": false,
     "fetching": false,
     "errorMsg": ""
+  },
+
+  "contact_detail": {
+    "contact": "",
+    "contactId": 0,
+    "helpText": "",
+    "isPhone": false,
+    "isValid": false,
+    "saved": false,
+    "updating": false
   }
 }

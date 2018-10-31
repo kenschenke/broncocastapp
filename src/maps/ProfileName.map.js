@@ -6,7 +6,8 @@ export const mapProfileNameProps = state => {
         errorMsg: state.profile_name.errorMsg,
         name: state.profile_name.name,
         getting: state.profile_name.getting,
-        updating: state.profile_name.updating
+        updating: state.profile_name.updating,
+        saved: state.profile_name.saved
     };
 };
 
@@ -29,7 +30,7 @@ export const mapProfileNameDispatch = dispatch => {
         nameChanged(name) {
             dispatch({
                 type: C.SET_PROFILE_NAME_DATA,
-                payload: { name }
+                payload: { name, saved: false }
             });
         },
 

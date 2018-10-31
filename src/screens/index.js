@@ -4,6 +4,7 @@ export * from './ForgotPassword';
 export * from './Main';
 export * from './MyBroadcasts';
 export * from './Profile';
+export * from './ProfileContactDetail';
 export * from './Register';
 export * from './ResetPassword';
 export * from './SignIn';

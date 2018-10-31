@@ -60,6 +60,7 @@ class SignInUi extends Component {
                     label="Email or phone number (digits only)"
                     value={this.props.username}
                     onChangeText={username => this.props.usernameChanged(username)}
+                    keyboardType="email-address"
                 />
 
                 <Input

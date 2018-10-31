@@ -10,7 +10,7 @@ export const getProfileName = () => dispatch => {
         }
     });
 
-    fetchUrl('URL_PROFILE')
+    fetchUrl(C.URL_PROFILE)
         .then(response => response.json())
         .then(data => {
             dispatch({
@@ -39,6 +39,15 @@ export const getProfileName = () => dispatch => {
 export const updateProfileName = () => (dispatch, getState) => {
     const state = getState();
 
+    const name = state.profile_name.name.trim();
+    if (!name.length) {
+        dispatch({
+            type: C.SET_PROFILE_NAME_DATA,
+            payload: { errorMsg: 'A name is required' }
+        });
+        return;
+    }
+
     dispatch({
         type: C.SET_PROFILE_NAME_DATA,
         payload: {
@@ -48,10 +57,10 @@ export const updateProfileName = () => (dispatch, getState) => {
     });
 
     let formData = new FormData();
-    formData.append('UsrName', state.profile_name.name);
+    formData.append('UsrName', name);
     formData.append('SingleMsg', state.profile_name.singleMsg ? 'true' : 'false');
 
-    fetchUrl('URL_PROFILE', {
+    fetchUrl(C.URL_PROFILE, {
         method: 'POST',
         body: formData
     })
@@ -59,7 +68,7 @@ export const updateProfileName = () => (dispatch, getState) => {
         .then(data => {
             dispatch({
                 type: C.SET_PROFILE_NAME_DATA,
-                payload: { updating: false }
+                payload: { updating: false, saved: true }
             });
             if (!data.Success) {
                 dispatch({
