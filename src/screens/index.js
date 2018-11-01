@@ -1,5 +1,6 @@
 export * from './Admin';
 export * from './AuthLoading';
+export * from './BroadcastDetail';
 export * from './ForgotPassword';
 export * from './Main';
 export * from './MyBroadcasts';

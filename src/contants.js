@@ -4,6 +4,8 @@ export default {
     SET_PROFILE_CONTACTS_DATA: "SET_PROFILE_CONTACTS_DATA",
     SET_CONTACT_DETAIL_DATA: "SET_CONTACT_DETAIL_DATA",
     SET_PROFILE_ORGS_DATA: "SET_PROFILE_ORGS_DATA",
+    SET_USER_BROADCASTS_DATA: "SET_USER_BROADCASTS_DATA",
+    SET_BROADCAST_DETAIL_DATA: "SET_BROADCAST_DETAIL_DATA",
 
     SERVER: "http://10.0.2.2:8000",
 
@@ -12,5 +14,6 @@ export default {
     URL_SIGNIN: "auth/login",
     URL_PROFILE: "api/profile",
     URL_CONTACTS: "api/contacts",
-    URL_USERORGS: "api/orgs"
+    URL_USERORGS: "api/orgs",
+    URL_USER_BROADCASTS: "api/broadcasts"
 };

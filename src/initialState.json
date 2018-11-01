@@ -39,5 +39,19 @@
     "fetching": false,
     "isValid": true,
     "joinTag": ""
+  },
+
+  "user_broadcasts": {
+    "broadcasts": [],
+    "errorMsg": "",
+    "fetching": false
+  },
+
+  "broadcast_detail": {
+    "sentBy": "",
+    "delivered": "",
+    "shortMsg": "",
+    "longMsg": "",
+    "recipients": []
   }
 }
