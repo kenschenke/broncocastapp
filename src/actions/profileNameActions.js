@@ -11,7 +11,13 @@ export const getProfileName = () => dispatch => {
     });
 
     fetchUrl(C.URL_PROFILE)
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw new Error('Unable to retrieve profile name')
+            }
+        })
         .then(data => {
             dispatch({
                 type: C.SET_PROFILE_NAME_DATA,
@@ -33,7 +39,13 @@ export const getProfileName = () => dispatch => {
                     singleMsg: data.SingleMsg
                 }
             });
-        });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_PROFILE_NAME_DATA,
+                payload: { getting: false, errorMsg: Error.message }
+            });
+    });
 };
 
 export const updateProfileName = () => (dispatch, getState) => {
@@ -64,17 +76,35 @@ export const updateProfileName = () => (dispatch, getState) => {
         method: 'POST',
         body: formData
     })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to update profile name');
+            }
+        })
         .then(data => {
             dispatch({
                 type: C.SET_PROFILE_NAME_DATA,
-                payload: { updating: false, saved: true }
+                payload: { updating: false }
             });
             if (!data.Success) {
                 dispatch({
                     type: C.SET_PROFILE_NAME_DATA,
                     payload: { errorMsg: data.Error }
                 });
+                return;
             }
-        });
+
+            dispatch({
+                type: C.SET_PROFILE_NAME_DATA,
+                payload: { saved: true }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_PROFILE_NAME_DATA,
+                payload: { updating: false, errorMsg: Error.message }
+            });
+    });
 };

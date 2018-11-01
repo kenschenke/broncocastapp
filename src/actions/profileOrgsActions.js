@@ -9,7 +9,7 @@ export const addOrg = () => (dispatch, getState) => {
         dispatch({
             type: C.SET_PROFILE_ORGS_DATA,
             payload: {
-                addOrgFailed: true,
+                isValid: false,
                 errorMsg: 'Organization tag cannot be empty'
             }
         });
@@ -23,12 +23,18 @@ export const addOrg = () => (dispatch, getState) => {
         method: 'POST',
         body: formData
     })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to join organization');
+            }
+        })
         .then(data => {
             if (!data.Success) {
                 dispatch({
                     type: C.SET_PROFILE_ORGS_DATA,
-                    payload: { errorMsg: data.Error, addOrgFailed: true }
+                    payload: { errorMsg: data.Error, isValid: false }
                 });
                 return;
             }
@@ -36,7 +42,7 @@ export const addOrg = () => (dispatch, getState) => {
             dispatch({
                 type: C.SET_PROFILE_ORGS_DATA,
                 payload: {
-                    addOrgFailed: false,
+                    isValid: true,
                     errorMsg: '',
                     joinTag: '',
                     orgs: [...state.profile_orgs.orgs, {
@@ -46,6 +52,12 @@ export const addOrg = () => (dispatch, getState) => {
                         IsAdmin: data.IsSystemAdmin
                     }]
                 }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_PROFILE_ORGS_DATA,
+                payload: { errorMsg: Error.message, isValid: false }
             });
         });
 };
@@ -57,7 +69,13 @@ export const getUserOrgs = () => dispatch => {
     });
 
     fetchUrl(C.URL_USERORGS)
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to retrieve organizations');
+            }
+        })
         .then(data => {
             dispatch({
                 type: C.SET_PROFILE_ORGS_DATA,
@@ -67,14 +85,20 @@ export const getUserOrgs = () => dispatch => {
             if (!data.Success) {
                 dispatch({
                     type: C.SET_PROFILE_ORGS_DATA,
-                    payload: { errorMsg: data.Error }
+                    payload: { errorMsg: data.Error, isValid: false }
                 });
                 return;
             }
 
             dispatch({
                 type: C.SET_PROFILE_ORGS_DATA,
-                payload: { orgs: data.Orgs, adminOrgs: data.AdminOrgs }
+                payload: { orgs: data.Orgs, adminOrgs: data.AdminOrgs, isValid: true }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_PROFILE_ORGS_DATA,
+                payload: { fetching: false, isValid: false, errorMsg: Error.message }
             });
         });
 };
@@ -84,12 +108,18 @@ export const removeOrg = MemberId => (dispatch, getState) => {
     const state = getState();
 
     fetchUrl(`${C.URL_USERORGS}/${MemberId}`, { method: 'DELETE' })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to drop organization');
+            }
+        })
         .then(data => {
             if (!data.Success) {
                 dispatch({
                     type: C.SET_PROFILE_ORGS_DATA,
-                    payload: { errorMsg: data.Error }
+                    payload: { errorMsg: data.Error, isValid: false }
                 });
                 return;
             }
@@ -97,8 +127,15 @@ export const removeOrg = MemberId => (dispatch, getState) => {
             dispatch({
                 type: C.SET_PROFILE_ORGS_DATA,
                 payload: {
+                    isValid: true,
                     orgs: state.profile_orgs.orgs.filter(org => org.MemberId !== MemberId)
                 }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_PROFILE_ORGS_DATA,
+                payload: { fetching: false, isValid: false, errorMsg: Error.message }
             });
         });
 };

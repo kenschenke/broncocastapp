@@ -12,6 +12,18 @@ class ProfileContactsUi extends Component {
         this.props.init();
     }
 
+    renderErrorMsg() {
+        if (!this.props.errorMsg.length) {
+            return null;
+        }
+
+        return (
+            <Text style={styles.errorMsgStyle}>
+                {this.props.errorMsg}
+            </Text>
+        );
+    }
+
     render() {
         if (this.props.fetching) {
             return (
@@ -62,6 +74,8 @@ class ProfileContactsUi extends Component {
                     </TouchableOpacity>
                 </View>
 
+                {this.renderErrorMsg()}
+
                 <Text style={onlyYouStyle}>
                     Add your contact information only. Use separate accounts for
                     other family members.
@@ -96,10 +110,17 @@ const styles = {
         fontSize: 18
     },
 
+    errorMsgStyle: {
+        marginLeft: 10,
+        marginTop: 15,
+        fontSize: 18,
+        color: '#cf2a27'
+    },
+
     onlyYouStyle: {
         marginLeft: 10,
         marginTop: 15,
-        color: '#cf2a27'
+        color: '#4176cf'
     },
 
     switchContainerStyle: {

@@ -5,9 +5,9 @@ import { addOrg, removeOrg } from '../actions/profileOrgsActions';
 export const mapProfileOrgsProps = state => {
     return {
         orgs: state.profile_orgs.orgs,
-        addOrgFailed: state.profile_orgs.addOrgFailed,
         errorMsg: state.profile_orgs.errorMsg,
         fetching: state.profile_orgs.fetching,
+        isValid: state.profile_orgs.isValid,
         joinTag: state.profile_orgs.joinTag
     };
 };

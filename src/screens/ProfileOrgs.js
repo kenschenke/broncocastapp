@@ -59,7 +59,7 @@ class ProfileOrgsUi extends Component {
                     label="Enter tag to join an organization"
                     value={this.props.joinTag}
                     onChangeText={value => this.props.joinTagChanged(value)}
-                    validContext={this.props.addOrgFailed ? 'error' : 'neutral' }
+                    validContext={this.props.isValid ? 'neutral' : 'error' }
                 />
 
                 <View style={{ flexDirection: 'row' }}>
@@ -92,9 +92,9 @@ const styles = {
 
 ProfileOrgsUi.propTypes = {
     orgs: PropTypes.array.isRequired,
-    addOrgFailed: PropTypes.bool.isRequired,
     errorMsg: PropTypes.string.isRequired,
     fetching: PropTypes.bool.isRequired,
+    isValid: PropTypes.bool.isRequired,
     joinTag: PropTypes.string.isRequired,
 
     init: PropTypes.func.isRequired,

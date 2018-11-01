@@ -12,7 +12,13 @@ export const deleteContact = navigate => (dispatch, getState) => {
     });
 
     fetchUrl(`${C.URL_CONTACTS}/${contactId}`, { method: 'DELETE' })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to delete contact record');
+            }
+        })
         .then(data => {
             if (!data.Success) {
                 dispatch({
@@ -30,6 +36,12 @@ export const deleteContact = navigate => (dispatch, getState) => {
             });
 
             navigate.goBack();
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_CONTACT_DETAIL_DATA,
+                payload: { isValid: false, helpText: Error.message }
+            });
         });
 };
 
@@ -44,7 +56,13 @@ export const getProfileContacts = () => dispatch => {
     });
 
     fetchUrl(C.URL_CONTACTS)
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to retrieve contacts');
+            }
+        })
         .then(data => {
             dispatch({
                 type: C.SET_PROFILE_CONTACTS_DATA,
@@ -63,7 +81,12 @@ export const getProfileContacts = () => dispatch => {
                 type: C.SET_PROFILE_CONTACTS_DATA,
                 payload: { contacts: data.Contacts }
             });
-        });
+        }).catch(Error => {
+            dispatch({
+                type: C.SET_PROFILE_CONTACTS_DATA,
+                payload: { fetching: false, errorMsg: Error.message }
+            });
+    });
 };
 
 export const saveContact = () => (dispatch, getState) => {
@@ -83,7 +106,13 @@ export const saveContact = () => (dispatch, getState) => {
         method: 'POST',
         body: formData
     })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to save contact record');
+            }
+        })
         .then(data => {
             dispatch({
                 type: C.SET_PROFILE_NAME_DATA,
@@ -129,6 +158,12 @@ export const saveContact = () => (dispatch, getState) => {
                     }
                 });
             }
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_CONTACT_DETAIL_DATA,
+                payload: { isValid: false, helpText: Error.message }
+            });
         });
 };
 
@@ -152,14 +187,32 @@ export const setSingleMsg = singleMsg => (dispatch, getState) => {
         method: 'POST',
         body: formData
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.Success) {
-                dispatch({
-                    type: C.SET_PROFILE_NAME_DATA,
-                    payload: { singleMsg }
-                });
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to set message preference');
             }
+        })
+        .then(data => {
+            if (!data.Success) {
+                dispatch({
+                    type: C.SET_PROFILE_CONTACTS_DATA,
+                    payload: { errorMsg: data.Error }
+                });
+                return;
+            }
+
+            dispatch({
+                type: C.SET_PROFILE_NAME_DATA,
+                payload: { singleMsg }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_PROFILE_CONTACTS_DATA,
+                payload: { errorMsg: Error.message }
+            });
         });
 };
 
@@ -190,7 +243,13 @@ export const testContact = () => (dispatch, getState) => {
     });
 
     fetchUrl(`${C.URL_CONTACTS}/test/${contactId}`, { method: 'PUT' })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to send test message');
+            }
+        })
         .then(data => {
             if (!data.Success) {
                 dispatch({
@@ -203,6 +262,12 @@ export const testContact = () => (dispatch, getState) => {
             dispatch({
                 type: C.SET_CONTACT_DETAIL_DATA,
                 payload: { helpText: 'Test message sent' }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_CONTACT_DETAIL_DATA,
+                payload: { isValid: false, helpText: Error.message }
             });
         });
 };

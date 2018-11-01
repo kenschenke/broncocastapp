@@ -34,10 +34,10 @@
 
   "profile_orgs": {
     "orgs": [],
-    "addOrgFailed": false,
     "adminOrgs": [],
     "errorMsg": "",
     "fetching": false,
+    "isValid": true,
     "joinTag": ""
   }
 }
