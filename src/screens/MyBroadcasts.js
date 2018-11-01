@@ -21,6 +21,16 @@ class MyBroadcastsUi extends Component {
             );
         }
 
+        if (this.props.errorMsg) {
+            return (
+                <View style={styles.containerStyle}>
+                    <Text style={{ fontSize: 18, color: '#cf2a27'}}>
+                        {this.props.errorMsg}
+                    </Text>
+                </View>
+            );
+        }
+
         const broadcasts = this.props.broadcasts.map(broadcast => {
             return (
                 <TouchableOpacity
