@@ -6,6 +6,7 @@ import appReducer from './src/reducers';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import {
     AuthLoading,
+    AdminUserDetail,
     BroadcastDetail,
     ForgotPassword,
     Main,
@@ -21,7 +22,8 @@ const AppStack = createStackNavigator(
     {
         Main: Main,
         ContactDetail: ProfileContactDetail,
-        BroadcastDetail: BroadcastDetail
+        BroadcastDetail: BroadcastDetail,
+        AdminUserDetail: AdminUserDetail
     }
 );
 

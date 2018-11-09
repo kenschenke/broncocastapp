@@ -16,6 +16,21 @@ export const fetchUrl = (relativeUrl, options) => {
     });
 };
 
+export const fetchUrlError = (relativeUrl, options) => {
+    return AsyncStorage.getItem('AuthCookie').then(cookie => {
+        if (options === undefined) {
+            options = {};
+        }
+        if (options.hasOwnProperty('cookie')) {
+            options.headers.cookie = cookie;
+        } else {
+            options.headers = { cookie };
+        }
+
+        return fetch(`127.0.0.1/${relativeUrl}`, options);
+    });
+};
+
 export const formatContact = contact => {
     if (contact.length === 10 && contact.search(/[^0-9]/) === -1) {
         return `(${contact.substr(0,3)}) ${contact.substr(3,3)}-${contact.substr(6)}`;

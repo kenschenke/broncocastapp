@@ -1,4 +1,5 @@
 export * from './Admin';
+export * from './AdminUserDetail';
 export * from './AuthLoading';
 export * from './BroadcastDetail';
 export * from './ForgotPassword';

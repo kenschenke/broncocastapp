@@ -53,5 +53,34 @@
     "shortMsg": "",
     "longMsg": "",
     "recipients": []
+  },
+
+  "admin_org": {
+    "orgId": 0,
+    "orgName": "",
+    "defaultTZ": "",
+    "adminOrgs": []
+  },
+
+  "admin_users": {
+    "users": [],
+    "fetching": false,
+    "errorMsg": "",
+    "modalVisible": false,
+    "filterOn": "hidehidden"
+  },
+
+  "admin_user_detail": {
+    "contacts": [],
+    "isAdmin": false,
+    "isApproved": false,
+    "isHidden": false,
+    "memberId": 0,
+    "smsLogs": [],
+    "updatingUserName": false,
+    "updatingUserNameDone": false,
+    "userId": 0,
+    "userName": "",
+    "userNameErrorMsg": ""
   }
 }

@@ -1,21 +1,25 @@
-import C from '../contants';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Spinner } from '../components';
 import { View } from 'react-native';
-import { fetchUrl } from '../helpers';
+import { checkAuth } from "../actions/signInActions";
 
-export class AuthLoading extends Component {
+const mapDispatch = dispatch => {
+    return {
+        checkAuth(navigation) {
+            dispatch(checkAuth(navigation));
+        }
+    };
+};
+
+class AuthLoadingUi extends Component {
     static navigationOptions = {
         title: 'AuthLoading'
     };
 
     componentDidMount() {
-        fetchUrl(C.URL_ISAUTH)
-            .then(response => response.json())
-            .then(responseJson => {
-                this.setState({ loading: false, isAuth: responseJson.IsAuth });
-                this.props.navigation.navigate(responseJson.IsAuth ? 'App' : 'Auth');
-            });
+        this.props.checkAuth(this.props.navigation);
     }
 
     render() {
@@ -26,3 +30,9 @@ export class AuthLoading extends Component {
         );
     }
 }
+
+AuthLoadingUi.propTypes = {
+    checkAuth: PropTypes.func.isRequired
+};
+
+export const AuthLoading = connect(null, mapDispatch)(AuthLoadingUi);
