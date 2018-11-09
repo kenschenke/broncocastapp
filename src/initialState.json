@@ -71,7 +71,11 @@
   },
 
   "admin_user_detail": {
+    "approving": false,
+    "approvingErrorMsg": "",
     "contacts": [],
+    "hiding": false,
+    "hidingErrorMsg": "",
     "isAdmin": false,
     "isApproved": false,
     "isHidden": false,

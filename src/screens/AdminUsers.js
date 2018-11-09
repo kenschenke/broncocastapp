@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { mapAdminUsersProps, mapAdminUsersDispatch } from '../maps/AdminUsers.map';
 import { connect } from 'react-redux';
 import { FlatList, Picker, Text, TouchableOpacity, View } from 'react-native';
-import { AdminUsersModal } from './AdminUsersModal';
 
 class AdminUsersUi extends Component {
     constructor(props) {
@@ -194,7 +193,6 @@ class AdminUsersUi extends Component {
         return (
             <View style={ContainerStyle}>
                 {this.renderAdminOrgHeader()}
-                <AdminUsersModal/>
                 <View style={{ flexDirection: 'row' }}>
                     {this.renderHiddenUsersButton()}
                     {this.renderUnapprovedButton()}

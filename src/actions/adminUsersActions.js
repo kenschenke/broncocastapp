@@ -1,8 +1,67 @@
 import C from '../contants';
-import { fetchUrl } from '../helpers';
+import { fetchUrl, fetchUrlError } from '../helpers';
 
 export const adminOrgChanged = () => dispatch => {
     dispatch(getUsers());
+};
+
+export const approveUser = () => (dispatch, getState) => {
+    const state = getState();
+
+    dispatch({
+        type: C.SET_ADMIN_USER_DETAIL_DATA,
+        payload: { approving: true, approvingErrorMsg: '' }
+    });
+
+    fetchUrl(`${C.URL_ADMIN_USERS_APPROVE}/${state.admin_user_detail.memberId}`, {
+        method: 'PUT'
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to approve user');
+            }
+        })
+        .then(data => {
+            dispatch({
+                type: C.SET_ADMIN_USER_DETAIL_DATA,
+                payload: { approving: false }
+            });
+            if (!data.Success) {
+                dispatch({
+                    type: C.SET_ADMIN_USER_DETAIL_DATA,
+                    payload: { approvingErrorMsg: data.Error }
+                });
+                return;
+            }
+
+            dispatch({
+                type: C.SET_ADMIN_USER_DETAIL_DATA,
+                payload: { isApproved: true }
+            });
+
+            dispatch({
+                type: C.SET_ADMIN_USERS_DATA,
+                payload: {
+                    users: state.admin_users.users.map(user => {
+                        return {
+                            ...user,
+                            Approved: user.MemberId === state.admin_user_detail.memberId ? true : user.Approved
+                        };
+                    })
+                }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_ADMIN_USER_DETAIL_DATA,
+                payload: {
+                    approving: false,
+                    approvingErrorMsg: Error.message
+                }
+            });
+        });
 };
 
 export const getUsers = () => (dispatch, getState) => {
@@ -50,6 +109,71 @@ export const getUsers = () => (dispatch, getState) => {
     });
 };
 
+export const hideUnhideUser = () => (dispatch, getState) => {
+    const state = getState();
+
+    const { isHidden, memberId } = state.admin_user_detail;
+    const urlHide = C.URL_ADMIN_USERS_HIDE;
+    const urlUnhide = C.URL_ADMIN_USERS_UNHIDE;
+    const url = `${isHidden ? urlUnhide : urlHide}/${memberId}`;
+
+    dispatch({
+        type: C.SET_ADMIN_USER_DETAIL_DATA,
+        payload: { hiding: true, hidingErrorMsg: '' }
+    });
+
+    fetchUrl(url, { method: 'PUT' })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to hide/unhide user');
+            }
+        })
+        .then(data => {
+            dispatch({
+                type: C.SET_ADMIN_USER_DETAIL_DATA,
+                payload: { hiding: false }
+            });
+            if (!data.Success) {
+                dispatch({
+                    type: C.SET_ADMIN_USER_DETAIL_DATA,
+                    payload: { hidingErrorMsg: data.Error }
+                });
+                return;
+            }
+
+            dispatch({
+                type: C.SET_ADMIN_USER_DETAIL_DATA,
+                payload: {
+                    hiding: false,
+                    isHidden: !isHidden
+                }
+            });
+
+            dispatch({
+                type: C.SET_ADMIN_USERS_DATA,
+                payload: {
+                    users: state.admin_users.users.map(user => {
+                        return {
+                            ...user,
+                            Hidden: user.MemberId === memberId ? !isHidden : user.Hidden
+                        };
+                    })
+                }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_ADMIN_USER_DETAIL_DATA,
+                payload: {
+                    hiding: false,
+                    hidingErrorMsg: Error.message
+                }
+            });
+        });
+};
+
 export const setAdminOrgId = orgId => (dispatch, getState) => {
     const state = getState();
 
@@ -72,10 +196,16 @@ export const setUserDetail = usrId => (dispatch, getState) => {
 
     const users = state.admin_users.users.filter(user => user.UsrId === usrId);
     if (users.length === 1) {
-        const { MemberId, UsrName } = users[0];
+        const { Approved, Hidden, MemberId, UsrName } = users[0];
         dispatch({
             type: C.SET_ADMIN_USER_DETAIL_DATA,
             payload: {
+                approving: false,
+                approvingErrorMsg: '',
+                hiding: false,
+                hidingErrorMsg: '',
+                isApproved: Approved,
+                isHidden: Hidden,
                 memberId: MemberId,
                 updatingUserName: false,
                 updatingUserNameDone: false,
@@ -106,25 +236,56 @@ export const updateUserName = () => (dispatch, getState) => {
         payload: { updatingUserName: true }
     });
 
-    setTimeout(() => {
-        dispatch({
-            type: C.SET_ADMIN_USER_DETAIL_DATA,
-            payload: {
-                updatingUserName: false,
-                updatingUserNameDone: true
-            }
-        });
+    let formData = new FormData();
+    formData.append('Name', name);
 
-        dispatch({
-            type: C.SET_ADMIN_USERS_DATA,
-            payload: {
-                users: state.admin_users.users.map(user => {
-                    return {
-                        ...user,
-                        UsrName: user.UsrId === state.admin_user_detail.userId ? name : user.UsrName
-                    };
-                })
+    fetchUrl(`${C.URL_ADMIN_USERS_NAME}/${state.admin_user_detail.memberId}`, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Unable to update user name');
             }
+        })
+        .then(data => {
+            dispatch({
+                type: C.SET_ADMIN_USER_DETAIL_DATA,
+                payload: {
+                    updatingUserName: false,
+                    updatingUserNameDone: true
+                }
+            });
+            if (!data.Success) {
+                dispatch({
+                    type: C.SET_ADMIN_USER_DETAIL_DATA,
+                    payload: { userNameErrorMsg: data.Error }
+                });
+                return;
+            }
+
+            dispatch({
+                type: C.SET_ADMIN_USERS_DATA,
+                payload: {
+                    users: state.admin_users.users.map(user => {
+                        return {
+                            ...user,
+                            UsrName: user.UsrId === state.admin_user_detail.userId ? name : user.UsrName
+                        };
+                    })
+                }
+            });
+        })
+        .catch(Error => {
+            dispatch({
+                type: C.SET_ADMIN_USER_DETAIL_DATA,
+                payload: {
+                    updatingUserName: false,
+                    updatingUserNameDone: true,
+                    userNameErrorMsg: Error.message
+                }
+            });
         });
-    }, 2000);
 };

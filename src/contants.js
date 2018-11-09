@@ -19,5 +19,9 @@ export default {
     URL_CONTACTS: "api/contacts",
     URL_USERORGS: "api/orgs",
     URL_USER_BROADCASTS: "api/broadcasts",
-    URL_ADMIN_USERS: "api/admin/users"
+    URL_ADMIN_USERS: "api/admin/users",
+    URL_ADMIN_USERS_NAME: "api/admin/users/name",
+    URL_ADMIN_USERS_APPROVE: "api/admin/users/approve",
+    URL_ADMIN_USERS_HIDE: "api/admin/users/hide",
+    URL_ADMIN_USERS_UNHIDE: "api/admin/users/unhide"
 };
