@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { mapProfileContactsProps, mapProfileContactsDispatch } from '../maps/ProfileContacts.map';
 import { connect } from 'react-redux';
 import { Card, CardSection, Spinner } from '../components';
-import { Switch, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { formatContact } from '../helpers';
 
@@ -56,7 +56,7 @@ class ProfileContactsUi extends Component {
         } = styles;
 
         return (
-            <View>
+            <ScrollView>
                 <Text style={tapTextStyle}>Tap a contact for more options</Text>
 
                 <Card>
@@ -89,7 +89,7 @@ class ProfileContactsUi extends Component {
                         are sent to every phone and email address in your profile.
                     </Text>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

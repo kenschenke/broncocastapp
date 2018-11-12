@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { mapProfileOrgsProps, mapProfileOrgsDispatch } from '../maps/ProfileOrgs.map';
 import { connect } from 'react-redux';
 import { Button, Card, CardSection, Input, Spinner } from '../components';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 class ProfileOrgsUi extends Component {
@@ -51,7 +51,7 @@ class ProfileOrgsUi extends Component {
         });
 
         return (
-            <View style={containerStyle}>
+            <ScrollView style={containerStyle}>
                 {orgs}
 
                 <Input
@@ -65,7 +65,7 @@ class ProfileOrgsUi extends Component {
                 <View style={{ flexDirection: 'row' }}>
                     <Button onPress={this.props.joinPressed}>Join</Button>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

@@ -210,7 +210,7 @@ const AdminUserDetailUi = props => {
             {renderAdminErrorMsg()}
             <Button
                 borderRadius={5}
-                backgroundColor="#006fce"
+                backgroundColor="#cf272a"
                 onPress={dropUserPressed}
                 title={props.droppingUser ? 'Removing User' : 'Remove From Organization'}
                 fontWeight="600"
