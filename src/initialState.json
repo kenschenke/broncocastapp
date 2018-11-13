@@ -90,5 +90,29 @@
     "userId": 0,
     "userName": "",
     "userNameErrorMsg": ""
+  },
+
+  "admin_groups": {
+    "groups": [],
+    "fetching": false,
+    "errorMsg": "",
+    "newGroupName": "",
+    "addingGroup": false,
+    "newGroupErrorMsg": ""
+  },
+
+  "admin_group_detail": {
+    "addingMember": false,
+    "addingMemberErrorMsg": "",
+    "addingMemberUserId": 0,
+    "deletingGroup": false,
+    "deletingGroupErrorMsg": "",
+    "fetchingMembers": false,
+    "fetchingNonMembers": false,
+    "fetchingMembersErrorMsg": "",
+    "fetchingNonMembersErrorMsg": "",
+    "groupId": 0,
+    "members": [],
+    "nonMembers": []
   }
 }

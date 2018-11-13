@@ -1,4 +1,6 @@
 export * from './Admin';
+export * from './AdminGroupDetail';
+export * from './AdminNewGroup';
 export * from './AdminUserDetail';
 export * from './AuthLoading';
 export * from './BroadcastDetail';

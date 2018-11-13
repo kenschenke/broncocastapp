@@ -6,6 +6,8 @@ import appReducer from './src/reducers';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import {
     AuthLoading,
+    AdminGroupDetail,
+    AdminNewGroup,
     AdminUserDetail,
     BroadcastDetail,
     ForgotPassword,
@@ -15,7 +17,6 @@ import {
     ResetPassword,
     SignIn
 } from "./src/screens";
-import { FlexBoxPlayground } from './src/screens/FlexBoxPlayground';
 import initialState from './src/initialState.json';
 
 const AppStack = createStackNavigator(
@@ -23,7 +24,9 @@ const AppStack = createStackNavigator(
         Main: Main,
         ContactDetail: ProfileContactDetail,
         BroadcastDetail: BroadcastDetail,
-        AdminUserDetail: AdminUserDetail
+        AdminUserDetail: AdminUserDetail,
+        AdminNewGroup: AdminNewGroup,
+        AdminGroupDetail: AdminGroupDetail
     }
 );
 
@@ -40,8 +43,7 @@ const RootStack = createSwitchNavigator(
     {
         AuthLoading: AuthLoading,
         App: AppStack,
-        Auth: AuthStack,
-        FlexBoxPlayground: FlexBoxPlayground
+        Auth: AuthStack
     },
     {
         initialRouteName: 'AuthLoading'

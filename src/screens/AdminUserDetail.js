@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Alert, ScrollView, Text, View } from 'react-native';
 import { Input } from '../components';
 import { Button } from 'react-native-elements';
-import {ProfileContactDetail} from "./ProfileContactDetail";
 
 const AdminUserDetailUi = props => {
     let userNameHelpText = '';
@@ -321,7 +320,6 @@ AdminUserDetailUi.propTypes = {
     isHidden: PropTypes.bool.isRequired,
     memberId: PropTypes.number.isRequired,
     smsLogs: PropTypes.array.isRequired,
-    // userId: PropTypes.number.isRequired,
     updatingUserName: PropTypes.bool.isRequired,
     updatingUserNameDone: PropTypes.bool.isRequired,
     userName: PropTypes.string.isRequired,
