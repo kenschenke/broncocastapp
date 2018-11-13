@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { mapAdminUsersProps, mapAdminUsersDispatch } from '../maps/AdminUsers.map';
 import { connect } from 'react-redux';
 import { FlatList, Picker, Text, TouchableOpacity, View } from 'react-native';
+import { Spinner } from '../components';
 
 class AdminUsersUi extends Component {
     constructor(props) {
@@ -187,8 +188,23 @@ class AdminUsersUi extends Component {
     render() {
         const {
             ContainerStyle,
+            ErrorMsgStyle,
             UsersListStyle
         } = styles;
+
+        if (this.props.fetching) {
+            return (
+                <View style={ContainerStyle}>
+                    <Spinner label="Loading Users"/>
+                </View>
+            );
+        } else if (this.props.errorMsg.length) {
+            return (
+                <View style={ContainerStyle}>
+                    <Text style={ErrorMsgStyle}>{this.props.errorMsg}</Text>
+                </View>
+            );
+        }
 
         return (
             <View style={ContainerStyle}>
@@ -242,6 +258,11 @@ const styles = {
 
     BlockedTextStyle: {
         color: '#fff'
+    },
+
+    ErrorMsgStyle: {
+        fontSize: 18,
+        color: '#cf272a'
     },
 
     NeutralBadgeStyle: {
@@ -345,8 +366,9 @@ const styles = {
 
 AdminUsersUi.propTypes = {
     adminOrgId: PropTypes.number.isRequired,
-    adminOrgName: PropTypes.string.isRequired,
     adminOrgs: PropTypes.array.isRequired,
+    errorMsg: PropTypes.string.isRequired,
+    fetching: PropTypes.bool.isRequired,
     filterOn: PropTypes.string.isRequired,
     numDeliveryProblems: PropTypes.number.isRequired,
     numHidden: PropTypes.number.isRequired,

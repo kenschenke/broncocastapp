@@ -188,7 +188,7 @@ export const getUsers = () => (dispatch, getState) => {
     fetchUrl(`${C.URL_ADMIN_USERS}/${state.admin_org.orgId}`)
         .then(response => {
             if (response.ok) {
-                return response.json()
+                return response.json();
             } else {
                 throw new Error('Unable to retrieve users');
             }
@@ -282,23 +282,6 @@ export const hideUnhideUser = () => (dispatch, getState) => {
                 }
             });
         });
-};
-
-export const setAdminOrgId = orgId => (dispatch, getState) => {
-    const state = getState();
-
-    const orgs = state.admin_org.adminOrgs.filter(org => org.OrgId === orgId);
-    if (orgs.length !== 1) {
-        return;
-    }
-
-    dispatch({
-        type: C.SET_ADMIN_ORG_DATA,
-        payload: {
-            orgId: orgId,
-            orgName: orgs[0].OrgName
-        }
-    });
 };
 
 export const setUserDetail = usrId => (dispatch, getState) => {

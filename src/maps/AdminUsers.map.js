@@ -1,5 +1,6 @@
 import C from '../contants';
-import { adminOrgChanged, setAdminOrgId, setUserDetail } from '../actions/adminUsersActions';
+import { adminOrgChanged, setUserDetail } from '../actions/adminUsersActions';
+import { setAdminOrgId } from '../actions/adminOrgActions';
 
 export const mapAdminUsersProps = state => {
     let numHiddenUsers = 0;
@@ -36,8 +37,9 @@ export const mapAdminUsersProps = state => {
 
     return {
         adminOrgId: state.admin_org.orgId,
-        adminOrgName: state.admin_org.orgName,
         adminOrgs: state.admin_org.adminOrgs,
+        errorMsg: state.admin_users.errorMsg,
+        fetching: state.admin_users.fetching,
         filterOn: state.admin_users.filterOn,
         numDeliveryProblems: numDeliveryProblems,
         numHidden: numHiddenUsers,
