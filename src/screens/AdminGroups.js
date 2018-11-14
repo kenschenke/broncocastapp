@@ -41,7 +41,7 @@ class AdminGroupsUi extends Component {
         const { GroupContainerStyle, GroupNameStyle } = styles;
 
         return (
-            <TouchableOpacity onPress={() => this.props.showGroupDetail(item.GroupId, this.props.navigation)}>
+            <TouchableOpacity onPress={() => this.props.showGroupDetail(item.GroupId, item.GroupName, this.props.navigation)}>
                 <View style={GroupContainerStyle}>
                     <Text style={GroupNameStyle}>{item.GroupName}</Text>
                 </View>

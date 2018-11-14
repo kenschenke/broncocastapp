@@ -1,3 +1,5 @@
+import { addMember } from '../actions/adminGroupsActions';
+
 export const mapAdminGroupsNonMembersProps = state => {
     const nonMembers = [...state.admin_group_detail.nonMembers];
     nonMembers.sort((m1, m2) => {
@@ -22,8 +24,8 @@ export const mapAdminGroupsNonMembersProps = state => {
 
 export const mapAdminGroupsNonMembersDispatch = dispatch => {
     return {
-        addPressed(userId) {
-
+        addPressed(UserId, UserName) {
+            dispatch(addMember(UserId, UserName));
         }
     };
 };

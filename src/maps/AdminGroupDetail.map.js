@@ -1,4 +1,4 @@
-import { deleteGroup } from '../actions/adminGroupsActions';
+import { deleteGroup, getGroupNonMembers, showRenameGroupScreen } from '../actions/adminGroupsActions';
 
 export const mapAdminGroupDetailProps = state => {
     const members = [...state.admin_group_detail.members];
@@ -24,7 +24,8 @@ export const mapAdminGroupDetailProps = state => {
 export const mapAdminGroupDetailDispatch = dispatch => {
     return {
         addMembersPressed(navigation) {
-
+            dispatch(getGroupNonMembers());
+            navigation.push('AdminGroupNonMembers');
         },
 
         deleteGroupPressed(navigation) {
@@ -32,11 +33,11 @@ export const mapAdminGroupDetailDispatch = dispatch => {
         },
 
         removeMembersPressed(navigation) {
-
+            navigation.push('AdminGroupMembers');
         },
 
         renameGroupPressed(navigation) {
-
+            dispatch(showRenameGroupScreen(navigation));
         }
     };
 };

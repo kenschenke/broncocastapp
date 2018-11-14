@@ -7,7 +7,10 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import {
     AuthLoading,
     AdminGroupDetail,
+    AdminGroupMembers,
+    AdminGroupsNonMembers,
     AdminNewGroup,
+    AdminRenameGroup,
     AdminUserDetail,
     BroadcastDetail,
     ForgotPassword,
@@ -26,7 +29,10 @@ const AppStack = createStackNavigator(
         BroadcastDetail: BroadcastDetail,
         AdminUserDetail: AdminUserDetail,
         AdminNewGroup: AdminNewGroup,
-        AdminGroupDetail: AdminGroupDetail
+        AdminGroupDetail: AdminGroupDetail,
+        AdminGroupMembers: AdminGroupMembers,
+        AdminGroupNonMembers: AdminGroupsNonMembers,
+        AdminRenameGroup: AdminRenameGroup
     }
 );
 

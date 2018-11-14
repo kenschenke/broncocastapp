@@ -31,5 +31,6 @@ export default {
     URL_ADMIN_GROUPS: "api/admin/groups",
     URL_ADMIN_GROUPS_REMOVE: "api/admin/groups/remove",
     URL_ADMIN_GROUP_MEMBERS: "api/admin/groups/members",
-    URL_ADMIN_GROUP_NONMEMBERS: "api/admin/groups/nonmembers"
+    URL_ADMIN_GROUP_NONMEMBERS: "api/admin/groups/nonmembers",
+    URL_ADMIN_GROUP_RENAME: "api/admin/groups/name"
 };

@@ -112,7 +112,14 @@
     "fetchingMembersErrorMsg": "",
     "fetchingNonMembersErrorMsg": "",
     "groupId": 0,
+    "groupName": "",
     "members": [],
-    "nonMembers": []
+    "nonMembers": [],
+    "removingMember": false,
+    "removingMemberErrorMsg": "",
+    "removingMemberId": 0,
+    "renamingGroup": false,
+    "renamingErrorMsg": "",
+    "renamingGroupName": ""
   }
 }

@@ -49,7 +49,7 @@ export const mapAdminGroupsDispatch = dispatch => {
             dispatch(setAdminOrgId(orgId));
         },
 
-        showGroupDetail(GroupId, navigation) {
+        showGroupDetail(GroupId, GroupName, navigation) {
             navigation.push('AdminGroupDetail');
             dispatch({
                 type: C.SET_ADMIN_GROUP_DETAIL_DATA,
@@ -61,6 +61,7 @@ export const mapAdminGroupsDispatch = dispatch => {
                     fetchingMembersErrorMsg: '',
                     fetchingNonMembersErrorMsg: '',
                     groupId: GroupId,
+                    groupName: GroupName,
                     members: [],
                     nonMembers: []
                 }
