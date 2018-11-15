@@ -121,5 +121,20 @@
     "renamingGroup": false,
     "renamingErrorMsg": "",
     "renamingGroupName": ""
+  },
+
+  "admin_broadcasts": {
+    "broadcasts": [],
+    "errorMsg": "",
+    "fetching": false,
+    "fetchingGroups": false,
+    "fetchingGroupsErrorMsg": "",
+    "groups": [],
+    "selectedUsers": [],
+    "shortMsg": "",
+    "shortMsgPristine": true,
+    "longMsg": "",
+    "sendingBroadcast": false,
+    "sendBroadcastErrorMsg": ""
   }
 }

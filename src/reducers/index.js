@@ -23,5 +23,6 @@ export default combineReducers({
     admin_users: dataReducer(C.SET_ADMIN_USERS_DATA),
     admin_user_detail: dataReducer(C.SET_ADMIN_USER_DETAIL_DATA),
     admin_groups: dataReducer(C.SET_ADMIN_GROUPS_DATA),
-    admin_group_detail: dataReducer(C.SET_ADMIN_GROUP_DETAIL_DATA)
+    admin_group_detail: dataReducer(C.SET_ADMIN_GROUP_DETAIL_DATA),
+    admin_broadcasts: dataReducer(C.SET_ADMIN_BROADCASTS_DATA)
 });

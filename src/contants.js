@@ -11,6 +11,7 @@ export default {
     SET_ADMIN_USER_DETAIL_DATA: "SET_ADMIN_USER_DETAIL_DATA",
     SET_ADMIN_GROUPS_DATA: "SET_ADMIN_GROUPS_DATA",
     SET_ADMIN_GROUP_DETAIL_DATA: "SET_ADMIN_GROUP_DETAIL_DATA",
+    SET_ADMIN_BROADCASTS_DATA: "SET_ADMIN_BROADCASTS_DATA",
 
     SERVER: "http://10.0.2.2:8000",
 
@@ -32,5 +33,8 @@ export default {
     URL_ADMIN_GROUPS_REMOVE: "api/admin/groups/remove",
     URL_ADMIN_GROUP_MEMBERS: "api/admin/groups/members",
     URL_ADMIN_GROUP_NONMEMBERS: "api/admin/groups/nonmembers",
-    URL_ADMIN_GROUP_RENAME: "api/admin/groups/name"
+    URL_ADMIN_GROUP_RENAME: "api/admin/groups/name",
+    URL_ADMIN_BROADCASTS: "api/admin/broadcasts",
+    URL_ADMIN_BROADCASTS_GROUPS: "api/admin/broadcasts/groups",
+    URL_ADMIN_BROADCASTS_NEW: "api/admin/broadcasts/new"
 };
