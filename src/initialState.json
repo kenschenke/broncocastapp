@@ -6,6 +6,11 @@
     "errorMsg": ""
   },
 
+  "forgot_password": {
+    "errorMsg": "",
+    "findingAccount": false
+  },
+
   "profile_name": {
     "name": "",
     "singleMsg": false,
