@@ -43,7 +43,7 @@ class AdminBroadcastsUi extends Component {
         return (
             <TouchableOpacity onPress={() => this.props.showBroadcast(item.BroadcastId, this.props.navigation)}>
                 <View style={BroadcastContainerStyle}>
-                    <Text>{item.Time}</Text>
+                    <Text>{item.Time} ({item.IsDelivered ? 'Delivered' : 'Scheduled'})</Text>
                     <Text numberOfLines={2} style={ShortMsgStyle}>{item.ShortMsg}</Text>
                 </View>
             </TouchableOpacity>

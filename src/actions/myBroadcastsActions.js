@@ -53,7 +53,8 @@ export const showBroadcastDetail = (broadcastId, navigation) => (dispatch, getSt
         type: C.SET_BROADCAST_DETAIL_DATA,
         payload: {
             sentBy: b[0].UsrName,
-            delivered: b[0].Delivered,
+            isDelivered: true,
+            time: b[0].Delivered,
             shortMsg: b[0].ShortMsg,
             longMsg: b[0].LongMsg,
             recipients: []

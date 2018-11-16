@@ -2,6 +2,9 @@ import C from '../contants';
 import { sendBroadcast } from '../actions/adminBroadcastsActions';
 
 export const mapAdminNewBroadcastProps = state => {
+    const maxShortMsg = 127;
+    const maxLongMsg = 2048;
+
     let shortMsgInputContext = 'neutral';
     let shortMsgHelpText = '';
     const shortMsg = state.admin_broadcasts.shortMsg.trim();
@@ -9,20 +12,20 @@ export const mapAdminNewBroadcastProps = state => {
         shortMsgHelpText = 'A short message is required';
         shortMsgInputContext = 'error';
     }
-    else if (shortMsg.length <= 140) {
-        shortMsgHelpText = `${140 - shortMsg.length} character${shortMsg.length + 1 !== 140 ? 's' : ''} left`;
+    else if (shortMsg.length <= maxShortMsg) {
+        shortMsgHelpText = `${maxShortMsg - shortMsg.length} character${shortMsg.length + 1 !== maxShortMsg ? 's' : ''} left`;
     } else {
-        shortMsgHelpText = `${shortMsg.length - 140} character${shortMsg.length - 1 !== 140 ? 's' : ''} too many`;
+        shortMsgHelpText = `${shortMsg.length - maxShortMsg} character${shortMsg.length - 1 !== maxShortMsg ? 's' : ''} too many`;
         shortMsgInputContext = 'error';
     }
 
     let longMsgInputContext = 'neutral';
     let longMsgHelpText = '';
     const longMsg = state.admin_broadcasts.longMsg.trim();
-    if (longMsg.length <= 2048) {
-        longMsgHelpText = `${2048 - longMsg.length} character${longMsg.length + 1 !== 2048 ? 's' : ''} left`;
+    if (longMsg.length <= maxLongMsg) {
+        longMsgHelpText = `${maxLongMsg - longMsg.length} character${longMsg.length + 1 !== maxLongMsg ? 's' : ''} left`;
     } else {
-        longMsgHelpText = `${longMsg.length - 2048} character${longMsg.length - 1 !== 2048 ? 's' : ''} too many`;
+        longMsgHelpText = `${longMsg.length - maxLongMsg} character${longMsg.length - 1 !== maxLongMsg ? 's' : ''} too many`;
         longMsgInputContext = 'error';
     }
 

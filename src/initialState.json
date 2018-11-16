@@ -49,7 +49,8 @@
 
   "broadcast_detail": {
     "sentBy": "",
-    "delivered": "",
+    "isDelivered": false,
+    "time": "",
     "shortMsg": "",
     "longMsg": "",
     "recipients": []

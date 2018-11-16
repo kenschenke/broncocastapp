@@ -53,7 +53,8 @@ class BroadcastDetailUi extends Component {
 
         const {
             sentBy,
-            delivered,
+            isDelivered,
+            time,
             shortMsg
         } = this.props;
 
@@ -68,8 +69,8 @@ class BroadcastDetailUi extends Component {
                     </CardSection>
                     <CardSection>
                         <View style={sectionStyle}>
-                            <Text style={labelStyle}>Delivered</Text>
-                            <Text style={contentStyle}>{delivered}</Text>
+                            <Text style={labelStyle}>{isDelivered ? 'Delivered' : 'Scheduled'}</Text>
+                            <Text style={contentStyle}>{time}</Text>
                         </View>
                     </CardSection>
                     <CardSection>
@@ -123,7 +124,8 @@ const styles = {
 
 BroadcastDetailUi.propTypes = {
     sentBy: PropTypes.string.isRequired,
-    delivered: PropTypes.string.isRequired,
+    isDelivered: PropTypes.bool.isRequired,
+    time: PropTypes.string.isRequired,
     shortMsg: PropTypes.string.isRequired,
     longMsg: PropTypes.string.isRequired,
     recipients: PropTypes.array.isRequired

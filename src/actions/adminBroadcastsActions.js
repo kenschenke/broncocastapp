@@ -226,7 +226,8 @@ export const showBroadcastDetail = (broadcastId, navigation) => (dispatch, getSt
         type: C.SET_BROADCAST_DETAIL_DATA,
         payload: {
             sentBy: b[0].UsrName,
-            delivered: b[0].Time,
+            time: b[0].Time,
+            isDelivered: b[0].IsDelivered,
             shortMsg: b[0].ShortMsg,
             longMsg: b[0].LongMsg,
             recipients: b[0].Recipients
@@ -240,8 +241,10 @@ export const showNewBroadcast = navigation => dispatch => {
     dispatch({
         type: C.SET_ADMIN_BROADCASTS_DATA,
         payload: {
-            shortMsg: '',
-            shortMsgPristine: true,
+            // shortMsg: '',
+            // shortMsgPristine: true,
+            shortMsg: 'abc',
+            shortMsgPristine: false,
             longMsg: '',
             fetchingGroups: false,
             fetchingGroupsErrorMsg: '',

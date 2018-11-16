@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { mapAdminNewBroadcastProps, mapAdminNewBroadcastDispatch } from '../maps/AdminNewBroadcast.map';
 import { connect } from 'react-redux';
-import { ScrollView, Text } from 'react-native';
+import { Alert, ScrollView, Text } from 'react-native';
 import { Input } from '../components';
 import { Button } from 'react-native-elements';
 import { AdminBroadcastRecipients } from '../components/AdminBroadcastRecipients';
@@ -16,6 +16,15 @@ const AdminNewBroadcastUi = props => {
         return (
             <Text style={styles.ErrorMsgStyle}>{props.sendBroadcastErrorMsg}</Text>
         );
+    };
+
+    const sendBroadcast = () => {
+        if (props.shortMsgInputContext !== 'neutral' || props.longMsgInputContext !== 'neutral') {
+            Alert.alert('Problem', 'The broadcast message is too long');
+            return;
+        }
+
+        props.sendBroadcastPressed(props.navigation);
     };
 
     return (
@@ -49,9 +58,9 @@ const AdminNewBroadcastUi = props => {
                 backgroundColor={props.sendingBroadcast ? '#ccc' : '#006fce'}
                 disabled={props.sendingBroadcast}
                 containerViewStyle={{ flex: 1 }}
-                title={props.sendingBroadcast ? 'Queuing Broadcast' : 'Queue Broadcast'}
+                title={props.sendingBroadcast ? 'Sending Broadcast' : 'Send Broadcast'}
                 fontWeight="600"
-                onPress={() => props.sendBroadcastPressed(props.navigation)}
+                onPress={sendBroadcast}
                 loading={props.sendingBroadcast}
                 loadingRight={true}
             />
