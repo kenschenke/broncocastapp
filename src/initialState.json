@@ -7,8 +7,13 @@
   },
 
   "forgot_password": {
+    "contact": "",
     "errorMsg": "",
-    "findingAccount": false
+    "findingAccount": false,
+    "resetPasswordErrorMsg": "",
+    "resettingPassword": false,
+    "sendCodeErrorMsg": "",
+    "sendingCode": false
   },
 
   "profile_name": {

@@ -15,4 +15,5 @@ export * from './Profile';
 export * from './ProfileContactDetail';
 export * from './Register';
 export * from './ResetPassword';
+export * from './ResetPasswordDone';
 export * from './SignIn';

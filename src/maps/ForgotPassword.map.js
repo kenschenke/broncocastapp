@@ -1,4 +1,5 @@
 import C from '../contants';
+import { sendRecoveryCode } from '../actions/forgotPasswordActions';
 
 export const mapForgotPasswordProps = state => {
     return {
@@ -9,18 +10,8 @@ export const mapForgotPasswordProps = state => {
 
 export const mapForgotPasswordDispatch = dispatch => {
     return {
-        findAccount(navigation) {
-            dispatch({
-                type: C.SET_FORGOT_PASSWORD_DATA,
-                payload: { findingAccount: true, errorMsg: '' }
-            });
-
-            setTimeout(() => {
-                dispatch({
-                    type: C.SET_FORGOT_PASSWORD_DATA,
-                    payload: { findingAccount: false, errorMsg: 'Error message goes here' }
-                });
-            }, 2500);
+        findAccount(contact, navigation) {
+            dispatch(sendRecoveryCode(contact, navigation));
         }
     };
 };

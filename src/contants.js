@@ -19,6 +19,8 @@ export default {
     URL_ISAUTH: "auth/isauth",
     URL_LOGOUT: "logout?applogout",
     URL_SIGNIN: "auth/login",
+    URL_RECOVER_SEND_CODE: "api/recover/send",
+    URL_RECOVER_SAVE_PASSWORD: "api/recover/save",
     URL_PROFILE: "api/profile",
     URL_CONTACTS: "api/contacts",
     URL_USERORGS: "api/orgs",

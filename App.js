@@ -19,6 +19,7 @@ import {
     ProfileContactDetail,
     Register,
     ResetPassword,
+    ResetPasswordDone,
     SignIn
 } from "./src/screens";
 import initialState from './src/initialState.json';
@@ -43,6 +44,7 @@ const AuthStack = createStackNavigator(
         SignIn: SignIn,
         ForgotPassword: ForgotPassword,
         ResetPassword: ResetPassword,
+        ResetPasswordDone: ResetPasswordDone,
         Register: Register
     }
 );
