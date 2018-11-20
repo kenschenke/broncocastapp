@@ -10,6 +10,7 @@ export * from './AuthLoading';
 export * from './BroadcastDetail';
 export * from './ForgotPassword';
 export * from './Main';
+export * from './MainNoAdmin';
 export * from './MyBroadcasts';
 export * from './Profile';
 export * from './ProfileContactDetail';

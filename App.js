@@ -16,6 +16,7 @@ import {
     BroadcastDetail,
     ForgotPassword,
     Main,
+    MainNoAdmin,
     ProfileContactDetail,
     Register1,
     Register2,
@@ -25,20 +26,27 @@ import {
 } from "./src/screens";
 import initialState from './src/initialState.json';
 
-const AppStack = createStackNavigator(
-    {
-        Main: Main,
-        ContactDetail: ProfileContactDetail,
-        BroadcastDetail: BroadcastDetail,
-        AdminUserDetail: AdminUserDetail,
-        AdminNewBroadcast: AdminNewBroadcast,
-        AdminNewGroup: AdminNewGroup,
-        AdminGroupDetail: AdminGroupDetail,
-        AdminGroupMembers: AdminGroupMembers,
-        AdminGroupNonMembers: AdminGroupsNonMembers,
-        AdminRenameGroup: AdminRenameGroup
-    }
-);
+const AppRoutesBase = {
+    ContactDetail: ProfileContactDetail,
+    BroadcastDetail: BroadcastDetail,
+    AdminUserDetail: AdminUserDetail,
+    AdminNewBroadcast: AdminNewBroadcast,
+    AdminNewGroup: AdminNewGroup,
+    AdminGroupDetail: AdminGroupDetail,
+    AdminGroupMembers: AdminGroupMembers,
+    AdminGroupNonMembers: AdminGroupsNonMembers,
+    AdminRenameGroup: AdminRenameGroup
+};
+
+const AppStackWithAdmin = createStackNavigator({
+    Main: Main,
+    ...AppRoutesBase
+});
+
+const AppStackNoAdmin = createStackNavigator({
+    Main: MainNoAdmin,
+    ...AppRoutesBase
+});
 
 const AuthStack = createStackNavigator(
     {
@@ -54,7 +62,8 @@ const AuthStack = createStackNavigator(
 const RootStack = createSwitchNavigator(
     {
         AuthLoading: AuthLoading,
-        App: AppStack,
+        AppWithAdmin: AppStackWithAdmin,
+        AppNoAdmin: AppStackNoAdmin,
         Auth: AuthStack
     },
     {

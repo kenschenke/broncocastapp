@@ -11,7 +11,7 @@ export const checkAuth = navigation => dispatch => {
                 dispatch(setAdminOrgData(data.AdminOrgs));
             }
 
-            navigation.navigate(data.IsAuth ? 'App' : 'Auth');
+            navigation.navigate(data.IsAuth ? (data.AdminOrgs.length ? 'AppWithAdmin' : 'AppNoAdmin') : 'Auth');
         });
 };
 
@@ -72,7 +72,7 @@ export const signIn = navigation => (dispatch, getState) => {
                 dispatch(setAdminOrgData(data.AdminOrgs));
                 CookieManager.clearAll().then(() => {
                     AsyncStorage.setItem('AuthCookie', cookie).then(() => {
-                        navigation.navigate('App');
+                        navigation.navigate(data.AdminOrgs.length ? 'AppWithAdmin' : 'AppNoAdmin');
                     })
                 });
             } else {
