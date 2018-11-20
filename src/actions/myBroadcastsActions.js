@@ -1,5 +1,5 @@
 import C from '../contants';
-import { fetchUrl, fetchUrlError } from '../helpers';
+import { fetchUrl } from '../helpers';
 
 export const getBroadcasts = () => dispatch => {
     dispatch({
