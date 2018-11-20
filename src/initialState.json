@@ -16,6 +16,15 @@
     "sendingCode": false
   },
 
+  "register": {
+    "email": "",
+    "password": "",
+    "name": "",
+    "phone": "",
+    "registering": false,
+    "registerErrorMsg": ""
+  },
+
   "profile_name": {
     "name": "",
     "singleMsg": false,

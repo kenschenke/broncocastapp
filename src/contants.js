@@ -1,6 +1,7 @@
 export default {
     SET_SIGN_IN_DATA: "SET_SIGN_IN_DATA",
     SET_FORGOT_PASSWORD_DATA: "SET_FORGOT_PASSWORD_DATA",
+    SET_REGISTER_DATA: "SET_REGISTER_DATA",
     SET_PROFILE_NAME_DATA: "SET_PROFILE_NAME_DATA",
     SET_PROFILE_CONTACTS_DATA: "SET_PROFILE_CONTACTS_DATA",
     SET_CONTACT_DETAIL_DATA: "SET_CONTACT_DETAIL_DATA",
@@ -21,6 +22,7 @@ export default {
     URL_SIGNIN: "auth/login",
     URL_RECOVER_SEND_CODE: "api/recover/send",
     URL_RECOVER_SAVE_PASSWORD: "api/recover/save",
+    URL_REGISTER: "api/register",
     URL_PROFILE: "api/profile",
     URL_CONTACTS: "api/contacts",
     URL_USERORGS: "api/orgs",

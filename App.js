@@ -17,7 +17,8 @@ import {
     ForgotPassword,
     Main,
     ProfileContactDetail,
-    Register,
+    Register1,
+    Register2,
     ResetPassword,
     ResetPasswordDone,
     SignIn
@@ -45,7 +46,8 @@ const AuthStack = createStackNavigator(
         ForgotPassword: ForgotPassword,
         ResetPassword: ResetPassword,
         ResetPasswordDone: ResetPasswordDone,
-        Register: Register
+        Register1: Register1,
+        Register2: Register2
     }
 );
 

@@ -31,6 +31,21 @@ export const mapSignInDispatch = dispatch => {
             });
         },
 
+        registerPressed(navigation) {
+            dispatch({
+                type: C.SET_REGISTER_DATA,
+                payload: {
+                    email: '',
+                    password: '',
+                    name: '',
+                    phone: '',
+                    registering: false,
+                    registerErrorMsg: ''
+                }
+            });
+            navigation.navigate('Register1');
+        },
+
         signIn(navigation) {
             dispatch(signIn(navigation));
         },

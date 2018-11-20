@@ -29,7 +29,7 @@ class SignInUi extends Component {
                     </CardSection>
 
                     <CardSection showBorder={false} transparent={true}>
-                        <Button onPress={() => this.props.navigation.navigate('Register')}>Register</Button>
+                        <Button onPress={() => this.props.registerPressed(this.props.navigation)}>Register</Button>
                         <Button onPress={() => this.props.navigation.navigate('ForgotPassword')}>Forgot Password</Button>
                     </CardSection>
                 </View>
@@ -86,6 +86,7 @@ SignInUi.propTypes = {
     signingIn: PropTypes.bool.isRequired,
 
     init: PropTypes.func.isRequired,
+    registerPressed: PropTypes.func.isRequired,
     signIn: PropTypes.func.isRequired,
     usernameChanged: PropTypes.func.isRequired,
     passwordChanged: PropTypes.func.isRequired
