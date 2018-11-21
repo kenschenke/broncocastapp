@@ -4,14 +4,13 @@ import { mapAdminGroupDetailProps, mapAdminGroupDetailDispatch } from '../maps/A
 import { connect } from 'react-redux';
 import { Alert, FlatList, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import { Spinner } from '../components';
+import { Card, Spinner } from '../components';
 
 const AdminGroupDetailUi = props => {
     const {
         ButtonRowStyle,
         ContainerStyle,
         ErrorMsgStyle,
-        MemberContainerStyle,
         MemberListStyle,
         MemberNameStyle
     } = styles;
@@ -51,9 +50,9 @@ const AdminGroupDetailUi = props => {
 
     const renderMemberItem = ({item}) => {
         return (
-            <View style={MemberContainerStyle}>
+            <Card>
                 <Text style={MemberNameStyle}>{item.UserName}</Text>
-            </View>
+            </Card>
         );
     };
 
@@ -127,22 +126,6 @@ const styles = {
     ErrorMsgStyle: {
         fontSize: 18,
         color: '#cf272a'
-    },
-
-    MemberContainerStyle: {
-        marginTop: 5,
-        marginBottom: 5,
-        padding: 10,
-        borderRadius: 6,
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#fff',
-        borderColor: '#ddd',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        elevation: 1
     },
 
     MemberListStyle: {

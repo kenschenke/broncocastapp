@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { mapProfileContactDetailProps, mapProfileContactDetailDispatch } from '../maps/ProfileContactDetail.map';
 import { connect } from 'react-redux';
 import { Alert, TextInput, View } from 'react-native';
-import { Button, Input } from '../components';
+import { Input } from '../components';
+import { Button } from 'react-native-elements';
 import { TextInputMask } from 'react-native-masked-text';
 
 class ProfileContactDetailUi extends Component {
@@ -45,8 +46,23 @@ class ProfileContactDetailUi extends Component {
                 />
 
                 <View style={buttonRowStyle}>
-                    <Button onPress={this.deletePressed}>Delete Contact</Button>
-                    <Button onPress={this.props.testPressed}>Send Test</Button>
+                    <Button
+                        borderRadius={5}
+                        containerViewStyle={{ flex: 1 }}
+                        backgroundColor="#006fce"
+                        fontWeight="600"
+                        title="Delete Contact"
+                        onPress={this.deletePressed}
+                    />
+
+                    <Button
+                        borderRadius={5}
+                        containerViewStyle={{ flex: 1 }}
+                        backgroundColor="#006fce"
+                        fontWeight="600"
+                        title="Send Test"
+                        onPress={this.props.testPressed}
+                    />
                 </View>
             </View>
         );

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapSignInProps, mapSignInDispatch } from '../maps/SignIn.map';
-import { Button, Card, CardSection, Input, Spinner } from '../components';
+import { Input, Spinner } from '../components';
+import { Button } from 'react-native-elements';
 import { Text, View } from 'react-native';
 
 class SignInUi extends Component {
@@ -16,33 +17,50 @@ class SignInUi extends Component {
 
     renderButtons() {
         if (this.props.signingIn) {
-            return (
-                <CardSection showBorder={false} transparent={true}>
-                    <Spinner label="Signing In"/>
-                </CardSection>
-            );
+            return <Spinner label="Signing In"/>;
         } else {
             return (
                 <View>
-                    <CardSection showBorder={false} transparent={true}>
-                        <Button onPress={this.signInPressed}>Sign In</Button>
-                    </CardSection>
+                    <Button
+                        borderRadius={5}
+                        backgroundColor="#006fce"
+                        fontWeight="600"
+                        onPress={this.signInPressed}
+                        title="Sign In"
+                    />
 
-                    <CardSection showBorder={false} transparent={true}>
-                        <Button onPress={() => this.props.registerPressed(this.props.navigation)}>Register</Button>
-                        <Button onPress={() => this.props.navigation.navigate('ForgotPassword')}>Forgot Password</Button>
-                    </CardSection>
+                    <View style={styles.ButtonRowStyle}>
+                        <Button
+                            borderRadius={5}
+                            containerViewStyle={{ flex: 1 }}
+                            backgroundColor="#006fce"
+                            fontWeight="600"
+                            title="Register"
+                            onPress={() => this.props.registerPressed(this.props.navigation)}
+                        />
+
+                        <Button
+                            borderRadius={5}
+                            containerViewStyle={{ flex: 1 }}
+                            backgroundColor="#006fce"
+                            fontWeight="600"
+                            title="Forgot Password"
+                            onPress={() => this.props.navigation.navigate('ForgotPassword')}
+                        />
+                    </View>
                 </View>
             );
         }
     }
 
     renderErrorMsg() {
+        const { ErrorMsgContainerStyle, ErrorMsgLabelStyle } = styles;
+
         if (this.props.errorMsg.length) {
             return (
-                <CardSection showBorder={false}>
-                    <Text style={{color: '#f00'}}>{this.props.errorMsg}</Text>
-                </CardSection>
+                <View style={ErrorMsgContainerStyle}>
+                    <Text style={ErrorMsgLabelStyle}>{this.props.errorMsg}</Text>
+                </View>
             );
         } else {
             return null;
@@ -55,7 +73,7 @@ class SignInUi extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#fff' }}>
+            <View style={styles.TopLevelStyle}>
                 <Input
                     label="Email or phone number (digits only)"
                     value={this.props.username}
@@ -72,13 +90,36 @@ class SignInUi extends Component {
 
                 {this.renderErrorMsg()}
 
-                <Card transparent={true}>
-                    {this.renderButtons()}
-                </Card>
+                {this.renderButtons()}
+
             </View>
         );
     }
 }
+
+const styles = {
+    ButtonRowStyle: {
+        flexDirection: 'row',
+        marginTop: 10
+    },
+
+    ErrorMsgContainerStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginBottom: 10
+    },
+
+    ErrorMsgLabelStyle: {
+        color: '#f00',
+        fontSize: 18
+    },
+
+    TopLevelStyle: {
+        flex: 1,
+        padding: 5,
+        backgroundColor: '#fff'
+    }
+};
 
 SignInUi.propTypes = {
     username: PropTypes.string.isRequired,

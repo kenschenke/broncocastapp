@@ -4,7 +4,7 @@ import { mapAdminBroadcastsProps, mapAdminBroadcastsDispatch } from '../maps/Adm
 import { connect } from 'react-redux';
 import { FlatList, Picker, Text, TouchableOpacity, View} from 'react-native';
 import { Button } from 'react-native-elements';
-import { Spinner } from '../components';
+import { Card, Spinner } from '../components';
 
 class AdminBroadcastsUi extends Component {
     constructor(props) {
@@ -38,14 +38,14 @@ class AdminBroadcastsUi extends Component {
     }
 
     renderBroadcastItem = ({item}) => {
-        const { BroadcastContainerStyle, ShortMsgStyle } = styles;
+        const { ShortMsgStyle } = styles;
 
         return (
             <TouchableOpacity onPress={() => this.props.showBroadcast(item.BroadcastId, this.props.navigation)}>
-                <View style={BroadcastContainerStyle}>
+                <Card>
                     <Text>{item.Time} ({item.IsDelivered ? 'Delivered' : 'Scheduled'})</Text>
                     <Text numberOfLines={2} style={ShortMsgStyle}>{item.ShortMsg}</Text>
-                </View>
+                </Card>
             </TouchableOpacity>
         );
     };
@@ -95,22 +95,6 @@ class AdminBroadcastsUi extends Component {
 }
 
 const styles = {
-    BroadcastContainerStyle: {
-        marginTop: 5,
-        marginBottom: 5,
-        padding: 10,
-        borderRadius: 6,
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: '#fff',
-        borderColor: '#ddd',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        elevation: 1
-    },
-
     BroadcastListStyle: {
         marginTop: 10
     },

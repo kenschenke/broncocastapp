@@ -1,17 +1,22 @@
 import React from 'react';
 import { View, ActivityIndicator, Text } from 'react-native';
-import { VerticalSection } from "./VerticalSection";
 
 const Spinner = ({ label, size }) => {
-    const { spinnerContainerStyle, spinnerStyle, spinnerTextContainerStyle, spinnerTextStyle } = styles;
+    const {
+        spinnerContainerStyle,
+        spinnerStyle,
+        spinnerTextContainerStyle,
+        spinnerTextStyle,
+        topLevelStyle
+    } = styles;
 
     return (
-        <View style={spinnerContainerStyle}>
-            <VerticalSection>
+        <View style={topLevelStyle}>
+            <View style={spinnerContainerStyle}>
                 <View style={spinnerStyle}>
                     <ActivityIndicator size={size || 'large'} />
                 </View>
-            </VerticalSection>
+            </View>
             <View style={spinnerTextContainerStyle}>
                 <Text style={spinnerTextStyle}>{label}</Text>
             </View>
@@ -27,9 +32,10 @@ const styles = {
     },
 
     spinnerContainerStyle: {
-        flex: 1,
         padding: 5,
-        flexDirection: 'column'
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        position: 'relative'
     },
 
     spinnerTextContainerStyle: {
@@ -40,6 +46,12 @@ const styles = {
 
     spinnerTextStyle: {
         fontSize: 18
+    },
+
+    topLevelStyle: {
+        flex: 1,
+        padding: 5,
+        flexDirection: 'column'
     }
 };
 

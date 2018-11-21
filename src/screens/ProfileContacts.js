@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mapProfileContactsProps, mapProfileContactsDispatch } from '../maps/ProfileContacts.map';
 import { connect } from 'react-redux';
-import { Card, CardSection, Spinner } from '../components';
+import { Card, Spinner } from '../components';
 import { ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { formatContact } from '../helpers';
@@ -26,21 +26,15 @@ class ProfileContactsUi extends Component {
 
     render() {
         if (this.props.fetching) {
-            return (
-                <Card>
-                    <CardSection>
-                        <Spinner size="small" label="Retrieving Contacts"/>
-                    </CardSection>
-                </Card>
-            );
+            return <Spinner size="small" label="Retrieving Contacts"/>;
         }
 
         const contacts = this.props.contacts.map(contact => {
             return (
                 <TouchableOpacity key={contact.ContactId} onPress={() => this.props.contactPressed(contact.ContactId, contact.Contact, this.props.navigation)}>
-                    <CardSection style={{ padding: 10 }}>
+                    <Card>
                         <Text style={{ fontSize: 18 }}>{formatContact(contact.Contact)}</Text>
-                    </CardSection>
+                    </Card>
                 </TouchableOpacity>
             );
         });
@@ -56,12 +50,10 @@ class ProfileContactsUi extends Component {
         } = styles;
 
         return (
-            <ScrollView>
+            <ScrollView style={{ padding: 10 }}>
                 <Text style={tapTextStyle}>Tap a contact for more options</Text>
 
-                <Card>
-                    {contacts}
-                </Card>
+                {contacts}
 
                 <View style={buttonContainerStyle}>
                     <TouchableOpacity style={buttonStyle} onPress={() => this.props.newPhonePressed(this.props.navigation)}>

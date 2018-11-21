@@ -4,7 +4,7 @@ import { mapAdminGroupsProps, mapAdminGroupsDispatch } from '../maps/AdminGroups
 import { connect } from 'react-redux';
 import { FlatList, Picker, Text, TouchableOpacity, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import { Spinner } from '../components';
+import { Card, Spinner } from '../components';
 
 class AdminGroupsUi extends Component {
     constructor(props) {
@@ -38,13 +38,13 @@ class AdminGroupsUi extends Component {
     }
 
     renderGroupItem = ({item}) => {
-        const { GroupContainerStyle, GroupNameStyle } = styles;
+        const { GroupNameStyle } = styles;
 
         return (
             <TouchableOpacity onPress={() => this.props.showGroupDetail(item.GroupId, item.GroupName, this.props.navigation)}>
-                <View style={GroupContainerStyle}>
+                <Card>
                     <Text style={GroupNameStyle}>{item.GroupName}</Text>
-                </View>
+                </Card>
             </TouchableOpacity>
         );
     };
@@ -102,22 +102,6 @@ const styles = {
     ErrorMsgStyle: {
         fontSize: 18,
         color: '#cf272a'
-    },
-
-    GroupContainerStyle: {
-        marginTop: 5,
-        marginBottom: 5,
-        padding: 10,
-        borderRadius: 6,
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#fff',
-        borderColor: '#ddd',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        elevation: 1
     },
 
     GroupListStyle: {
