@@ -35,8 +35,7 @@ class Input extends Component {
             inputStyle,
             labelStyle,
             neutralColor,
-            successColor,
-            validationIconStyle
+            successColor
         } = styles;
 
         let color;
@@ -81,7 +80,6 @@ class Input extends Component {
                 <Text style={{ ...labelStyle, color }}>{this.props.label}</Text>
                 <View style={{ flexDirection: 'row' }}>
                     {input}
-                    <View style={{ ...validationIconStyle, color }}/>
                 </View>
                 <Text style={{ ...helpTextStyle, color }}>{this.props.helpText}</Text>
             </View>
@@ -95,7 +93,6 @@ const styles = {
     successColor: '#009e0f',
 
     containerStyle: {
-        // backgroundColor: '#fff',
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
@@ -122,12 +119,6 @@ const styles = {
     labelStyle: {
         fontSize: 16,
         marginBottom: 5
-    },
-
-    validationIconStyle: {
-        paddingLeft: 10,
-        paddingTop: 5,
-        width: 30,
     }
 };
 
