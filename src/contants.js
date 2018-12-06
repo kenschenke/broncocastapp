@@ -15,7 +15,7 @@ export default {
     SET_ADMIN_GROUP_DETAIL_DATA: "SET_ADMIN_GROUP_DETAIL_DATA",
     SET_ADMIN_BROADCASTS_DATA: "SET_ADMIN_BROADCASTS_DATA",
 
-    SERVER: "http://10.0.2.2:8000",
+    SERVER: "http://dev.broncocast.org",
 
     URL_ISAUTH: "auth/isauth",
     URL_LOGOUT: "logout?applogout",
